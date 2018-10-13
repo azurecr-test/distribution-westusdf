@@ -3,9 +3,10 @@ steps:
   # build images to be tested
   - id: build-test-image
     build: -t {{.Run.Registry}}/distribution-yaml:{{.Run.ID}} -f Dockerfile .
+    when: ["-"]
   - id: build-hello-world
     build: -t {{.Run.Registry}}/hello-world:{{.Run.ID}} -f hello-world.dockerfile .
-    when: ["build-test-image"]
+    when: ["-"]
   # run built images
   - id: run-built-hello-world
     cmd: "{{.Run.Registry}}/hello-world:{{.Run.ID}}"
